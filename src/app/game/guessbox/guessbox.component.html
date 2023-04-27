@@ -1,1 +1,29 @@
-<p>guessbox works!</p>
+<section class="guessbox-container">
+  <div class="ng-autocomplete">
+    <ng-autocomplete
+      [data]="agrupacionList"
+      [searchKeyword]="'name'"
+      placeholder="Escribe una agrupación..."
+      (selected)="selectEvent($event)"
+      (inputChanged)="onChangeSearch($event)"
+      (inputFocused)="onFocused($event)"
+      (inputCleared)="onCleared($event)"
+      [itemTemplate]="itemTemplate"
+      [notFoundTemplate]="notFoundTemplate"
+      [focusFirst]="true"
+    >
+    </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="'Sin resultados'"></div>
+    </ng-template>
+  </div>
+
+  <div class="button-container">
+    <button type="button" (click)="sendAgrupacion()">Enviar</button>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+::ng-deep {
+  .autocomplete-container {
+    .suggestions-container.force-hidden {
+      visibility: hidden !important;
+    }
+
+    .not-found.force-hidden {
+      visibility: hidden !important;
+    }
+  }
+}
+
+.guessbox-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+
+  .ng-autocomplete {
+    width: 75%;
+  }
+
+  .button-container {
+    width: 22%;
+    height: 100%;
+
+    button {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
