@@ -9,11 +9,23 @@ import { AgrupacionesService } from '../services/agrupaciones.service';
   styleUrls: ['./game.container.scss'],
 })
 export class GameContainer {
-  agrupacionesList$: Observable<Agrupacion[]> = this.agrupacionesService.getAgrupaciones();
+  // TODO: Esto sería la agrupación de la pieza aleatoria que viene desde el servicio para iniciar el juego
+  agrupacion: Agrupacion = {
+    _id: 2,
+    name: 'La eternidad',
+  };
 
+  agrupacionesList$: Observable<Agrupacion[]> = this.agrupacionesService.getAgrupaciones();
+  answersList: Agrupacion[] = [];
   constructor(private agrupacionesService: AgrupacionesService) {}
 
-  selectAgrupacion(event: Agrupacion) {
-    console.log(event);
+  selectAgrupacion(agrup: Agrupacion) {
+    // No acierta la agrupacion
+    if (this.agrupacion._id !== agrup._id && !this.answersList.includes(agrup)) {
+      this.answersList.push(agrup);
+      return;
+    }
+    // Acierta la agrupacion
+    // TODO: ALert y resto del flujo
   }
 }
