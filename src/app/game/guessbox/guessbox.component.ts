@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Agrupacion } from 'src/app/models/agrupacion.model';
 
 @Component({
@@ -7,6 +7,8 @@ import { Agrupacion } from 'src/app/models/agrupacion.model';
   styleUrls: ['./guessbox.component.scss'],
 })
 export class GuessboxComponent {
+  @ViewChild('autocomplete') autocomplete: any;
+
   @Input() agrupacionList!: Agrupacion[];
   agrupacionSelected?: Agrupacion;
 
@@ -19,6 +21,7 @@ export class GuessboxComponent {
   sendAgrupacion() {
     if (this.agrupacionSelected !== undefined)
       this.selectAgrupacionEvent.emit(this.agrupacionSelected);
+    this.autocomplete.clear();
   }
 
   onChangeSearch(val: string) {
