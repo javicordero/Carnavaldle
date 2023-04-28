@@ -1,5 +1,6 @@
+<app-quote [quote]="quote"></app-quote>
 <app-guessbox
-  [agrupacionList]="(agrupacionesList$ | async) "
+  [agrupacionList]="agrupacionesList"
   (selectAgrupacionEvent)="selectAgrupacion($event)"
 ></app-guessbox>
 <app-answers [answersList]="answersList"></app-answers>

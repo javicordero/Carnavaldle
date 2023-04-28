@@ -1,5 +1,5 @@
 export interface Agrupacion {
-  _id?: number;
+  _id?: string;
   name?: string;
   year?: number;
 }
