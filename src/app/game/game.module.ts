@@ -5,6 +5,7 @@ import { QuoteComponent } from './quote/quote.component';
 import { GuessboxComponent } from './guessbox/guessbox.component';
 import { AnswersComponent } from './answers/answers.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { TriesComponent } from './tries/tries.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     QuoteComponent,
     GuessboxComponent,
     AnswersComponent,
+    TriesComponent,
   ],
   imports: [CommonModule, AutocompleteLibModule],
   exports: [GameContainer],

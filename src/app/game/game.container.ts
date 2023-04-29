@@ -23,7 +23,8 @@ export class GameContainer implements OnInit {
   quote: string;
   quoteIndex: number = 0;
 
-  tries: number = 0;
+  tries: number = 1;
+  maxTries: number = 3;
 
   constructor(
     private agrupacionesService: AgrupacionesService,
@@ -36,7 +37,7 @@ export class GameContainer implements OnInit {
 
   selectAgrupacion(agrup: Agrupacion) {
     this.tries++;
-    if (this.tries >= 3) {
+    if (this.tries > this.maxTries) {
       this.gameOver();
       return;
     }
@@ -61,7 +62,7 @@ export class GameContainer implements OnInit {
 
   startGame() {
     // Reset values
-    this.tries = 0;
+    this.tries = 1;
     this.quoteIndex = 0;
     this.answersList = [];
 
