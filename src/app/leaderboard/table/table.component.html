@@ -1,0 +1,93 @@
+<div class="mat-elevation-z8">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ loggedUser._id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by Username">Usuario</th>
+      <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ loggedUser.username }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gamesPlayed">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by gamesPlayed"
+      >
+        Partidas jugadas
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.gamesPlayed }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ loggedUser.gamesPlayed }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gamesWon">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by gamesWon"
+      >
+        Partidas ganadas
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.gamesWon }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ loggedUser.gamesWon }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gamesWonFirstTry">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by gamesWonFirstTry"
+      >
+        Panagas a la primera
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.gamesWonFirstTry }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ loggedUser.gamesWonFirstTry }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="streak">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by streak">
+        Racha actual
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.streak }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ loggedUser.streak }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="maxStreak">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by maxStreak"
+      >
+        Rahca máxima
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.maxStreak }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ 1 }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>
