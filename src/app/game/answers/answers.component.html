@@ -1,5 +1,5 @@
 <section>
-  <ul>
-    <li *ngFor="let answer of answersList">{{ answer.name }}</li>
-  </ul>
+  <article *ngFor="let answer of answersList">
+    {{ answer.agrupacion.name }} {{ answer.isCorrect }}
+  </article>
 </section>

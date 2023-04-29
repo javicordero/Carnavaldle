@@ -1,7 +1,10 @@
+<button type="button" (click)="startGame()" *ngIf="!gameStarted">Iniciar juego</button>
+<app-timer [timeLeft]="timeLeft" *ngIf="gameStarted"></app-timer>
 <app-quote [quote]="quote"></app-quote>
 <app-guessbox
   [agrupacionList]="agrupacionesList"
   (selectAgrupacionEvent)="selectAgrupacion($event)"
+  [gameStarted]="gameStarted"
 ></app-guessbox>
 <app-tries [tries]="tries" [maxTries]="maxTries"></app-tries>
 <app-answers [answersList]="answersList"></app-answers>

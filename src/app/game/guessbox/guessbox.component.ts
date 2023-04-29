@@ -7,6 +7,8 @@ import { Agrupacion } from 'src/app/models/agrupacion.model';
   styleUrls: ['./guessbox.component.scss'],
 })
 export class GuessboxComponent {
+  @Input() gameStarted: boolean = false;
+
   @ViewChild('autocomplete') autocomplete: any;
 
   @Input() agrupacionList!: Agrupacion[];

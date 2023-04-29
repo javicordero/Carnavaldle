@@ -25,6 +25,6 @@
   </div>
 
   <div class="button-container">
-    <button type="button" (click)="sendAgrupacion()">Enviar</button>
+    <button type="button" (click)="sendAgrupacion()" [disabled]="!gameStarted">Enviar</button>
   </div>
 </section>
