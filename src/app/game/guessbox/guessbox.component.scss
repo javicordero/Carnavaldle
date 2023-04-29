@@ -1,3 +1,7 @@
+:host {
+  width: 100%;
+}
+
 ::ng-deep {
   .autocomplete-container {
     .suggestions-container.force-hidden {
@@ -6,6 +10,21 @@
 
     .not-found.force-hidden {
       visibility: hidden !important;
+    }
+
+    .input-container {
+      input {
+        padding: 0 10px !important;
+        text-overflow: ellipsis !important;
+        width: 96% !important;
+      }
+      .x {
+        right: 5px !important;
+      }
+    }
+
+    .suggestions-container ul li a {
+      padding: 12px 10px !important;
     }
   }
 }

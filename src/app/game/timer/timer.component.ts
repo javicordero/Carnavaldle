@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class TimerComponent {
   @Input() timeLeft: number;
+  @Output() startGame: EventEmitter<boolean> = new EventEmitter<boolean>();
 }

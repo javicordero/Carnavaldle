@@ -84,7 +84,7 @@ export class GameContainer implements OnInit {
     this.answersList = [];
     this.piece = this.piecesServices.getRandomPiece();
     this.quote = this.piece.quotes[this.quoteIndex];
-    this.startTimer();
+    // this.startTimer();
     this.gameStarted = true;
     this.agrupacionesList$.subscribe((agrupaciones) => {
       this.agrupacionesList = agrupaciones;
@@ -98,7 +98,7 @@ export class GameContainer implements OnInit {
 
   gameWin() {
     this.stopGame();
-    alert('Acierto');
+    // alert('Acierto');
   }
 
   gameOver() {

@@ -1,10 +1,15 @@
-<button type="button" (click)="startGame()" *ngIf="!gameStarted">Iniciar juego</button>
-<app-timer [timeLeft]="timeLeft" *ngIf="gameStarted"></app-timer>
-<app-quote [quote]="quote"></app-quote>
-<app-guessbox
-  [agrupacionList]="agrupacionesList"
-  (selectAgrupacionEvent)="selectAgrupacion($event)"
-  [gameStarted]="gameStarted"
-></app-guessbox>
-<app-tries [tries]="tries" [maxTries]="maxTries"></app-tries>
-<app-answers [answersList]="answersList"></app-answers>
+<div class="game-container">
+  <div class="timmer-button-container">
+    <button type="button" (click)="startGame()" *ngIf="!gameStarted">Iniciar juego</button>
+    <app-timer [timeLeft]="timeLeft" *ngIf="gameStarted"></app-timer>
+    <app-tries [tries]="tries" [maxTries]="maxTries" *ngIf="gameStarted"></app-tries>
+  </div>
+
+  <app-quote [quote]="quote"></app-quote>
+  <app-guessbox
+    [agrupacionList]="agrupacionesList"
+    (selectAgrupacionEvent)="selectAgrupacion($event)"
+    [gameStarted]="gameStarted"
+  ></app-guessbox>
+  <app-answers [answersList]="answersList"></app-answers>
+</div>

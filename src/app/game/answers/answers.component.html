@@ -1,5 +1,5 @@
 <section>
-  <article *ngFor="let answer of answersList">
-    {{ answer.agrupacion.name }} {{ answer.isCorrect }}
+  <article *ngFor="let answer of answersList" [ngClass]="!answer.isCorrect ? 'bg-red' : 'bg-green'">
+    <p>{{ answer.agrupacion.name }}</p>
   </article>
 </section>

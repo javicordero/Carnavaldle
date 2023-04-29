@@ -1,0 +1,30 @@
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 50%;
+  margin: auto;
+
+  @media (width < 576px) {
+    width: 90%;
+  }
+
+  @media (576px <= width <= 800px) {
+    width: 70%;
+  }
+}
+
+.timmer-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border: 1px dotted blue;
+  width: 100%;
+  position: relative;
+  button {
+    height: 100%;
+  }
+}
