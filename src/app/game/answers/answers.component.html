@@ -1,5 +1,9 @@
 <section>
-  <article *ngFor="let answer of answersList" [ngClass]="!answer.isCorrect ? 'bg-red' : 'bg-green'">
+  <article
+    *ngFor="let answer of answersList"
+    [ngClass]="!answer.isCorrect ? 'bg-red animate__headShake' : 'bg-green animate__shakeY'"
+    class="animate__animated"
+  >
     <p>{{ answer.agrupacion.name }}</p>
   </article>
 </section>
