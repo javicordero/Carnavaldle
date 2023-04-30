@@ -35,6 +35,7 @@ export class GameContainer implements OnInit {
   // Timer
   timeLeft: number = 10;
   interval: number;
+  timeLeft$: Subject<number> = new Subject();
 
   constructor(
     private agrupacionesService: AgrupacionesService,
@@ -61,6 +62,7 @@ export class GameContainer implements OnInit {
   selectAgrupacion(agrup: Agrupacion) {
     // No acierta la agrupacion
     this.timeLeft = 10;
+    this.timeLeft$.next(this.timeLeft);
     let answer: Answer = { agrupacion: agrup, isCorrect: false };
 
     if (this.piece.agrupacionId !== agrup._id) {
@@ -110,9 +112,11 @@ export class GameContainer implements OnInit {
     this.interval = window.setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
+        this.timeLeft$.next(this.timeLeft);
       } else {
         this.timeLeft = 10;
         this.tries$.next(this.tries + 1);
+        this.timeLeft$.next(this.timeLeft);
       }
     }, 1000);
   }

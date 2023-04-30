@@ -1,7 +1,10 @@
 <div class="game-container">
   <div class="timmer-button-container">
-    <button type="button" (click)="startGame()" *ngIf="!gameStarted">Iniciar juego</button>
-    <app-timer [timeLeft]="timeLeft" *ngIf="gameStarted"></app-timer>
+    <app-timerButton
+      [gameStarted]="gameStarted"
+      [timeLeft$]="timeLeft$"
+      (startGameEventEmitter)="startGame()"
+    ></app-timerButton>
     <app-tries [tries]="tries" [maxTries]="maxTries" *ngIf="gameStarted"></app-tries>
   </div>
 

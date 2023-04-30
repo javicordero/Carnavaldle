@@ -6,7 +6,7 @@ import { GuessboxComponent } from './guessbox/guessbox.component';
 import { AnswersComponent } from './answers/answers.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { TriesComponent } from './tries/tries.component';
-import { TimerComponent } from './timer/timer.component';
+import { TimerButtonComponent } from './timerButton/timerButton.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { TimerComponent } from './timer/timer.component';
     GuessboxComponent,
     AnswersComponent,
     TriesComponent,
-    TimerComponent,
+    TimerButtonComponent,
   ],
   imports: [CommonModule, AutocompleteLibModule],
   exports: [GameContainer],
