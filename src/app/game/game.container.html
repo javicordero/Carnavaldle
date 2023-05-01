@@ -7,8 +7,7 @@
     ></app-timerButton>
     <app-tries [tries]="tries" [maxTries]="maxTries" *ngIf="gameStarted"></app-tries>
   </div>
-
-  <app-quote [quote]="quote"></app-quote>
+  <app-quotes [quoteIndex$]="quoteIndex$" [quotesList]="quotesList"></app-quotes>
   <app-guessbox
     [agrupacionList]="agrupacionesList"
     (selectAgrupacionEvent)="selectAgrupacion($event)"

@@ -1,0 +1,23 @@
+.quote-container {
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  border: 2px solid green;
+  height: 150px;
+
+  main {
+    display: grid;
+    place-items: center;
+    p {
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: normal;
+    }
+  }
+}

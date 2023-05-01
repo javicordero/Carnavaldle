@@ -23,9 +23,11 @@ export class GameContainer implements OnInit {
   // Answers
   answersList: Answer[] = [];
 
-  // Quote
+  // Quotes
   quote: string = 'Si caminito del falla';
   quoteIndex: number = 0;
+  quoteIndex$: Subject<number> = new Subject();
+  quotesList: string[] = ['Si caminito del falla'];
 
   // Tries
   tries$: Subject<number> = new Subject();
@@ -51,7 +53,9 @@ export class GameContainer implements OnInit {
         return;
       }
       this.quoteIndex++;
+      this.quoteIndex$.next(this.quoteIndex);
       this.quote = this.piece.quotes[this.quoteIndex];
+      this.quotesList.push(this.quote);
     });
 
     this.agrupacionesList$.subscribe((agrupaciones) => {
@@ -84,8 +88,10 @@ export class GameContainer implements OnInit {
     this.tries = 1;
     this.quoteIndex = 0;
     this.answersList = [];
+    this.quotesList = [];
     this.piece = this.piecesServices.getRandomPiece();
     this.quote = this.piece.quotes[this.quoteIndex];
+    this.quotesList.push(this.quote);
     this.startTimer();
     this.gameStarted = true;
     this.agrupacionesList$.subscribe((agrupaciones) => {

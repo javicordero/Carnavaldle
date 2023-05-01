@@ -1,0 +1,12 @@
+<section>
+  <header>
+    <p>¿Qué agrupación canta?</p>
+  </header>
+  <main>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let quote of quotesList">
+        <app-quote [quote]="quote"></app-quote>
+      </ng-template>
+    </owl-carousel-o>
+  </main>
+</section>
