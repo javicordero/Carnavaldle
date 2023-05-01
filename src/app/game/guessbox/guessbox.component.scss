@@ -17,6 +17,10 @@
         padding: 0 10px !important;
         text-overflow: ellipsis !important;
         width: 96% !important;
+
+        &:disabled {
+          background-color: white !important;
+        }
       }
       .x {
         right: 5px !important;
