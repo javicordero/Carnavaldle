@@ -1,0 +1,20 @@
+<section>
+  <form action="">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Letra</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="10"
+        cdkAutosizeMaxRows="50"
+        placeholder="Si caminito del falla...."
+      ></textarea>
+    </mat-form-field>
+
+    <div class="button-container">
+      <!-- <button mat-stroked-button (click)="submit()">Enviar</button> -->
+      <button mat-raised-button color="primary" (submit)="submit()">Enviar</button>
+    </div>
+  </form>
+</section>

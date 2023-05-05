@@ -1,44 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Agrupacion } from '../models/agrupacion.model';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AgrupacionesService {
-  agrupacionesList: Agrupacion[] = [
-    {
-      _id: '1',
-      name: 'Los millonarios',
-    },
-    {
-      _id: '2',
-      name: 'La eternidad',
-    },
-    {
-      _id: '3',
-      name: 'La eterna banda del capitán veneno',
-    },
-    {
-      _id: '4',
-      name: 'La banda del capitán veneno',
-    },
-    {
-      _id: '5',
-      name: 'Daddy Cádiz',
-    },
-    {
-      _id: '6',
-      name: 'Lassss envenenássss',
-    },
-    {
-      _id: '7',
-      name: 'Los niños sin nombre',
-    },
-  ];
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  url: string = 'http://localhost:3000/api/v1/agrupaciones';
 
   getAgrupaciones(): Observable<Agrupacion[]> {
-    return of(this.agrupacionesList);
+    return this.http.get<Agrupacion[]>(`${this.url}/`);
+    // return of(this.agrupacionesList);
+  }
+
+  createAgrupacion(agrupacion: Agrupacion): Observable<Agrupacion> {
+    return this.http.post<Agrupacion>(`${this.url}/`, agrupacion);
   }
 }
