@@ -1,0 +1,12 @@
+.wrapper {
+  width: 60%;
+  margin: auto;
+
+  @media (width < 576px) {
+    width: 90%;
+  }
+
+  @media (576px <= width <= 800px) {
+    width: 75%;
+  }
+}

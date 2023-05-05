@@ -8,6 +8,7 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollaborateModule } from './collaborate/collaborate.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderModule } from './header/header.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     GameModule,
     LeaderboardModule,
+    HeaderModule,
     BrowserAnimationsModule,
     CollaborateModule,
     HttpClientModule,
