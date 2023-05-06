@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Agrupacion } from '../models/agrupacion.model';
 import { Observable, Subject, take } from 'rxjs';
 import { AgrupacionesService } from '../services/agrupaciones.service';
@@ -12,12 +12,16 @@ import { Answer } from '../models/answer.model';
   styleUrls: ['./game.container.scss'],
 })
 export class GameContainer implements OnInit {
+  // Services
+  private readonly agrupacionesService = inject(AgrupacionesService);
+  private readonly piecesService = inject(PiecesService);
+
   // Game
   piece: Piece;
   gameStarted: boolean = false;
 
   // Guessbox
-  agrupacionesList$: Observable<Agrupacion[]> = this.agrupacionesService.getAgrupaciones();
+  agrupacionesList$: Observable<Agrupacion[]>;
   agrupacionesList: Agrupacion[] = [];
 
   // Answers
@@ -39,10 +43,9 @@ export class GameContainer implements OnInit {
   interval: number;
   timeLeft$: Subject<number> = new Subject();
 
-  constructor(
-    private agrupacionesService: AgrupacionesService,
-    private piecesServices: PiecesService
-  ) {}
+  constructor() {
+    this.agrupacionesList$ = this.agrupacionesService.getAgrupaciones();
+  }
 
   ngOnInit(): void {
     this.tries$.subscribe((tries) => {
@@ -89,7 +92,7 @@ export class GameContainer implements OnInit {
     this.quoteIndex = 0;
     this.answersList = [];
     this.quotesList = [];
-    this.piecesServices
+    this.piecesService
       .getRandomPiece()
       .pipe(take(1))
       .subscribe((piece) => {

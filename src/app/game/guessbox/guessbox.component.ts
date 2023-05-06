@@ -71,7 +71,12 @@ export class GuessboxComponent {
         ?.toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
-        .includes(value.toLowerCase())
+        .includes(
+          value
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+        )
     );
   }
 }

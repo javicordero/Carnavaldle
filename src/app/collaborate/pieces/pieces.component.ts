@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ReplaySubject, Subscription, takeUntil } from 'rxjs';
@@ -16,6 +16,10 @@ export class PiecesComponent implements OnInit, OnDestroy {
   private pieceSuscription: Subscription;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
+  // Services
+  private readonly piecesService = inject(PiecesService);
+  private readonly agrupacionesService = inject(AgrupacionesService);
+
   agrupacionesList: Agrupacion[] = [];
 
   // Form
@@ -29,10 +33,7 @@ export class PiecesComponent implements OnInit, OnDestroy {
   agrupacionesSelect: FormControl = new FormControl();
   filteredAgrupaciones: Agrupacion[];
 
-  constructor(
-    private readonly piecesService: PiecesService,
-    private readonly agrupacionesService: AgrupacionesService
-  ) {
+  constructor() {
     this.form.setControl('lyrics', this.lyricsCtrl);
     this.form.setControl('agrupacion', this.agrupacionCtrl);
     this.form.setControl('part', this.partCtrl);

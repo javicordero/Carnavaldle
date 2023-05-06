@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AutoresService } from '../services/autores.service';
 import { Autor } from '../models/autor.model';
 import { Observable } from 'rxjs';
@@ -11,7 +11,9 @@ import { Observable } from 'rxjs';
 export class CollaborateComponent implements OnInit {
   autoresList$: Observable<Autor[]>;
 
-  constructor(private autoresService: AutoresService) {}
+  private readonly autoresService = inject(AutoresService);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.autoresList$ = this.autoresService.getAutores();

@@ -6,6 +6,7 @@ import {
   AfterContentChecked,
   AfterViewInit,
   AfterContentInit,
+  inject,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -24,6 +25,9 @@ import { CustomErrorStateMatcher } from '../pieces/pieces.component';
 export class AgrupacionesComponent implements OnInit {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
+  // Services
+  private readonly agrupacionesService = inject(AgrupacionesService);
+
   @Input() autoresList: Autor[] = [];
 
   // Autores multi select
@@ -39,7 +43,7 @@ export class AgrupacionesComponent implements OnInit {
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
   formControlErrorMatcher = new CustomErrorStateMatcher();
 
-  constructor(private agrupacionesService: AgrupacionesService) {
+  constructor() {
     this.form.setControl('autores', this.autoresCtrl);
     this.form.setControl('agrupacion', this.nameCtrl);
     this.form.setControl('modalidad', this.modalidadCtrl);
