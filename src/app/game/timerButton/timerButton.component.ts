@@ -1,12 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { ReplaySubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-timerButton',
   templateUrl: './timerButton.component.html',
   styleUrls: ['./timerButton.component.scss'],
 })
-export class TimerButtonComponent implements OnInit {
+export class TimerButtonComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+
   timeLeft: number = 10;
   @Input() timeLeft$: Subject<number>;
 
@@ -72,5 +74,10 @@ export class TimerButtonComponent implements OnInit {
     document
       .getElementById('base-timer-path-remaining')
       .setAttribute('stroke-dasharray', circleDasharray);
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

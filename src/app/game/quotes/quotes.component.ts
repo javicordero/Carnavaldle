@@ -1,5 +1,5 @@
-import { Subject } from 'rxjs';
-import { Component, Input } from '@angular/core';
+import { ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -7,7 +7,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   templateUrl: './quotes.component.html',
   styleUrls: ['./quotes.component.scss'],
 })
-export class QuotesComponent {
+export class QuotesComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+
   @Input() quotesList: string[] = [];
   @Input() quoteIndex$: Subject<number> = new Subject<number>();
 
@@ -37,9 +39,14 @@ export class QuotesComponent {
     nav: true,
   };
 
-  ngOnInit(): void {
-    this.quoteIndex$.subscribe((index) => {
+  ngOnInit() {
+    this.quoteIndex$.pipe(takeUntil(this.destroyed$)).subscribe((index) => {
       this.customOptions.startPosition = index;
     });
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }
