@@ -3,13 +3,34 @@
 }
 
 section {
-  display: flex;
-  flex-direction: column;
   width: 99%;
-  gap: 15px;
-  margin: 15px auto auto auto;
+  margin: 20px auto auto auto;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
+
 .button-container {
   display: flex;
   justify-content: end;
+}
+
+.agrupacion-pieces-list {
+  h3 {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+    list-style-type: decimal;
+  }
+}
+
+::ng-deep {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
 }

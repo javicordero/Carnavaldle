@@ -21,23 +21,24 @@ import { AgrupacionesService } from 'src/app/services/agrupaciones.service';
   styleUrls: ['./agrupaciones.component.scss'],
 })
 export class AgrupacionesComponent implements OnInit {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+
   @Input() autoresList: Autor[] = [];
 
-  autoresMultiCtrl: FormControl = new FormControl('', [Validators.required]);
+  // Autores multi select
   filteredAutores: Autor[];
   autoresSelect: FormControl = new FormControl();
+
+  // Form
+  form: FormGroup = new FormGroup({});
+  autoresCtrl: FormControl = new FormControl('', [Validators.required]);
   nameCtrl: FormControl = new FormControl('', [Validators.required]);
   modalidadCtrl: FormControl = new FormControl('', [Validators.required]);
   yearCtrl: FormControl = new FormControl('', [Validators.required]);
-
-  form: FormGroup = new FormGroup({});
-
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
-  protected _onDestroy = new Subject();
-
   constructor(private agrupacionesService: AgrupacionesService) {
-    this.form.setControl('autores', this.autoresMultiCtrl);
+    this.form.setControl('autores', this.autoresCtrl);
     this.form.setControl('agrupacion', this.nameCtrl);
     this.form.setControl('modalidad', this.modalidadCtrl);
     this.form.setControl('year', this.yearCtrl);
@@ -46,12 +47,12 @@ export class AgrupacionesComponent implements OnInit {
   ngOnInit() {
     this.filteredAutores = this.autoresList;
 
-    this.autoresSelect.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe((value) => {
-      this.filterWebsiteMulti(value);
+    this.autoresSelect.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe((value) => {
+      this.filterAutoresMulti(value);
     });
   }
 
-  filterWebsiteMulti(value: string) {
+  filterAutoresMulti(value: string) {
     this.filteredAutores = this.autoresList.filter(
       (autor) =>
         autor.apodo?.toLowerCase().includes(value.toLowerCase()) ||
@@ -66,19 +67,19 @@ export class AgrupacionesComponent implements OnInit {
     let agrupacion: Agrupacion;
     agrupacion = {
       name: this.nameCtrl.value,
-      autores: this.autoresMultiCtrl.value,
+      autores: this.autoresCtrl.value,
       modalidad: this.modalidadCtrl.value,
       year: this.yearCtrl.value,
     };
-    console.log(agrupacion);
 
-    // this.agrupacionesService.createAgrupacion(agrupacion).subscribe((res) => {
-    //   console.log(res);
-    // });
+    this.agrupacionesService
+      .createAgrupacion(agrupacion)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((res) => {});
   }
 
   ngOnDestroy() {
-    this._onDestroy.next(true);
-    this._onDestroy.complete();
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

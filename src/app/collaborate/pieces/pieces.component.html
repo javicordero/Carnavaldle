@@ -1,5 +1,44 @@
 <section>
   <form action="">
+    <mat-form-field appearance="outline">
+      <mat-label>Agrupación</mat-label>
+      <mat-select [formControl]="agrupacionCtrl">
+        <mat-option>
+          <ngx-mat-select-search
+            [formControl]="agrupacionesSelect"
+            placeholderLabel="Buscar"
+            noEntriesFoundLabel="No hay resultados"
+          ></ngx-mat-select-search>
+        </mat-option>
+
+        <mat-option *ngFor="let agrupacion of filteredAgrupaciones" [value]="agrupacion">
+          {{ agrupacion.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <article *ngIf="agrupacionCtrl.value.pieces?.length > 0" class="agrupacion-pieces-list">
+      <h3>Piezas incluidas de la agrupación</h3>
+      <ul>
+        <li *ngFor="let piece of agrupacionCtrl.value.pieces">
+          {{ piece.part }}
+          <span *ngIf="piece.part !== 'Presentación' && piece.part !== 'Popurrí'"
+            >"{{ piece.lyrics.split("\n")[0] }}"</span
+          >
+        </li>
+      </ul>
+    </article>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Parte</mat-label>
+      <mat-select [formControl]="partCtrl">
+        <mat-option [value]="'Presentación'">Presentación</mat-option>
+        <mat-option [value]="'Pasodoble'">Pasodoble</mat-option>
+        <mat-option [value]="'Cuplé'">Cuplé</mat-option>
+        <mat-option [value]="'Popurrí'">Popurrí</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Letra</mat-label>
       <textarea
@@ -9,12 +48,12 @@
         cdkAutosizeMinRows="10"
         cdkAutosizeMaxRows="50"
         placeholder="Si caminito del falla...."
+        [formControl]="lyricsCtrl"
       ></textarea>
     </mat-form-field>
 
     <div class="button-container">
-      <!-- <button mat-stroked-button (click)="submit()">Enviar</button> -->
-      <button mat-raised-button color="primary" (submit)="submit()">Enviar</button>
+      <button mat-stroked-button (click)="submit()">Enviar</button>
     </div>
   </form>
 </section>

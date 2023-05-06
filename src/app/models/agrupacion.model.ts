@@ -1,4 +1,5 @@
 import { Autor } from './autor.model';
+import { Piece } from './piece.model';
 
 export interface Agrupacion {
   _id?: string;
@@ -6,4 +7,5 @@ export interface Agrupacion {
   year?: number;
   modalidad?: string;
   autores?: Autor[];
+  pieces?: Piece[];
 }

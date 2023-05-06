@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Agrupacion } from '../models/agrupacion.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 import { AgrupacionesService } from '../services/agrupaciones.service';
 import { PiecesService } from '../services/pieces.service';
 import { Piece } from '../models/piece.model';
@@ -69,7 +69,7 @@ export class GameContainer implements OnInit {
     this.timeLeft$.next(this.timeLeft);
     let answer: Answer = { agrupacion: agrup, isCorrect: false };
 
-    if (this.piece.agrupacionId !== agrup._id) {
+    if (this.piece.agrupacion._id !== agrup._id) {
       this.answersList.push(answer);
       this.tries$.next(this.tries + 1);
       // Borra del listado de agrupaciones la fallida
@@ -89,9 +89,15 @@ export class GameContainer implements OnInit {
     this.quoteIndex = 0;
     this.answersList = [];
     this.quotesList = [];
-    this.piece = this.piecesServices.getRandomPiece();
-    this.quote = this.piece.quotes[this.quoteIndex];
-    this.quotesList.push(this.quote);
+    this.piecesServices
+      .getRandomPiece()
+      .pipe(take(1))
+      .subscribe((piece) => {
+        this.piece = piece;
+        this.quote = this.piece.quotes[this.quoteIndex];
+        this.quotesList.push(this.quote);
+      });
+
     this.startTimer();
     this.gameStarted = true;
     this.agrupacionesList$.subscribe((agrupaciones) => {

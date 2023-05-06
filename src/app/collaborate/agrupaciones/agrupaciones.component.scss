@@ -3,17 +3,17 @@
 }
 
 section {
-  display: flex;
-  flex-direction: column;
   width: 99%;
-  margin-top: 15px;
-  gap: 15px;
-  margin: 15px auto auto auto;
+  margin: 20px auto auto auto;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .custom-trigger {
   position: absolute;
-  //   top: 16px;
   width: 97%;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -22,7 +22,6 @@ section {
 
 ::ng-deep {
   .mat-mdc-form-field {
-    // min-width: 400px !important;
     width: 100% !important;
   }
 
