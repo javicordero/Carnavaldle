@@ -4,6 +4,7 @@
       #autocomplete
       [data]="agrupacionList"
       [searchKeyword]="'name'"
+      [customFilter]="customFilter"
       placeholder="Escribe una agrupación..."
       (selected)="selectEvent($event)"
       (inputChanged)="onChangeSearch($event)"

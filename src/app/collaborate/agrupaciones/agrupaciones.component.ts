@@ -57,8 +57,16 @@ export class AgrupacionesComponent implements OnInit {
   filterAutoresMulti(value: string) {
     this.filteredAutores = this.autoresList.filter(
       (autor) =>
-        autor.apodo?.toLowerCase().includes(value.toLowerCase()) ||
-        autor.name.toLowerCase().includes(value.toLowerCase())
+        autor.apodo
+          ?.toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .includes(value.toLowerCase()) ||
+        autor.name
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .includes(value.toLowerCase())
     );
   }
 

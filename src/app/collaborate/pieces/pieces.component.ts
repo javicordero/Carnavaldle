@@ -74,7 +74,16 @@ export class PiecesComponent implements OnInit, OnDestroy {
 
   filterAutoresMulti(value: string) {
     this.filteredAgrupaciones = this.agrupacionesList.filter((agrupacion) =>
-      agrupacion.name.toLowerCase().includes(value.toLowerCase())
+      agrupacion.name
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .includes(
+          value
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+        )
     );
   }
 

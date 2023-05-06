@@ -64,4 +64,14 @@ export class GuessboxComponent {
     let notfount = document.querySelector('.not-found');
     notfount?.classList.remove('force-hidden');
   }
+
+  customFilter(agrupaciones: Agrupacion[], value: string): Agrupacion[] {
+    return agrupaciones.filter((agrupacion) =>
+      agrupacion.name
+        ?.toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .includes(value.toLowerCase())
+    );
+  }
 }
