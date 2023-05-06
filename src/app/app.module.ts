@@ -7,8 +7,10 @@ import { GameModule } from './game/game.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollaborateModule } from './collaborate/collaborate.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderModule } from './header/header.module';
+import { SpinnerModule } from './spinner/spinner.module';
+import { LoadingInterceptor } from './loading.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +23,9 @@ import { HeaderModule } from './header/header.module';
     BrowserAnimationsModule,
     CollaborateModule,
     HttpClientModule,
+    SpinnerModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
