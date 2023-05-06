@@ -14,6 +14,7 @@ import { ReplaySubject, Subject, takeUntil, take } from 'rxjs';
 import { Agrupacion } from 'src/app/models/agrupacion.model';
 import { Autor } from 'src/app/models/autor.model';
 import { AgrupacionesService } from 'src/app/services/agrupaciones.service';
+import { CustomErrorStateMatcher } from '../pieces/pieces.component';
 
 @Component({
   selector: 'app-agrupaciones',
@@ -36,6 +37,7 @@ export class AgrupacionesComponent implements OnInit {
   modalidadCtrl: FormControl = new FormControl('', [Validators.required]);
   yearCtrl: FormControl = new FormControl('', [Validators.required]);
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+  formControlErrorMatcher = new CustomErrorStateMatcher();
 
   constructor(private agrupacionesService: AgrupacionesService) {
     this.form.setControl('autores', this.autoresCtrl);
@@ -61,6 +63,7 @@ export class AgrupacionesComponent implements OnInit {
   }
 
   submit() {
+    this.form.markAllAsTouched();
     if (this.form.invalid) {
       return;
     }
@@ -75,7 +78,9 @@ export class AgrupacionesComponent implements OnInit {
     this.agrupacionesService
       .createAgrupacion(agrupacion)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        this.form.reset();
+      });
   }
 
   ngOnDestroy() {

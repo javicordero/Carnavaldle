@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { ReplaySubject, Subscription, takeUntil } from 'rxjs';
 import { Agrupacion } from 'src/app/models/agrupacion.model';
 import { Piece } from 'src/app/models/piece.model';
@@ -22,6 +23,7 @@ export class PiecesComponent implements OnInit, OnDestroy {
   lyricsCtrl: FormControl = new FormControl('', Validators.required);
   agrupacionCtrl: FormControl = new FormControl('', Validators.required);
   partCtrl: FormControl = new FormControl('', Validators.required);
+  formControlErrorMatcher = new CustomErrorStateMatcher();
 
   // Select agrupaciones
   agrupacionesSelect: FormControl = new FormControl();
@@ -77,6 +79,7 @@ export class PiecesComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    this.form.markAllAsTouched();
     if (this.form.invalid) {
       return;
     }
@@ -89,11 +92,20 @@ export class PiecesComponent implements OnInit, OnDestroy {
     this.piecesService
       .createPiece(piece)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        this.lyricsCtrl.reset();
+        this.partCtrl.reset();
+      });
   }
 
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+}
+
+export class CustomErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl, form: NgForm | FormGroupDirective | null) {
+    return control && control.invalid && control.touched;
   }
 }
