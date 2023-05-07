@@ -12,3 +12,7 @@
     width: 75%;
   }
 }
+
+::ng-deep .alertify-notifier.ajs-top {
+  top: 40px !important;
+}

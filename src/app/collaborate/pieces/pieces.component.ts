@@ -5,6 +5,7 @@ import { ReplaySubject, Subscription, takeUntil } from 'rxjs';
 import { Agrupacion } from 'src/app/models/agrupacion.model';
 import { Piece } from 'src/app/models/piece.model';
 import { AgrupacionesService } from 'src/app/services/agrupaciones.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
 import { PiecesService } from 'src/app/services/pieces.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class PiecesComponent implements OnInit, OnDestroy {
   // Services
   private readonly piecesService = inject(PiecesService);
   private readonly agrupacionesService = inject(AgrupacionesService);
+  private readonly alertifyService = inject(AlertifyService);
 
   agrupacionesList: Agrupacion[] = [];
 
@@ -91,6 +93,7 @@ export class PiecesComponent implements OnInit, OnDestroy {
   submit() {
     this.form.markAllAsTouched();
     if (this.form.invalid) {
+      this.alertifyService.error('Completa los campos');
       return;
     }
     let piece: Piece = {
@@ -102,9 +105,15 @@ export class PiecesComponent implements OnInit, OnDestroy {
     this.piecesService
       .createPiece(piece)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((res) => {
-        this.lyricsCtrl.reset();
-        this.partCtrl.reset();
+      .subscribe({
+        next: (data) => {
+          this.alertifyService.success('Pieza enviada');
+          this.lyricsCtrl.reset();
+          this.partCtrl.reset();
+        },
+        error: (err) => {
+          this.alertifyService.error(err.error);
+        },
       });
   }
 

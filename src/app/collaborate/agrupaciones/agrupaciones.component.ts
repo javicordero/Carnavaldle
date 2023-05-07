@@ -1,21 +1,12 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ViewChild,
-  AfterContentChecked,
-  AfterViewInit,
-  AfterContentInit,
-  inject,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDatepicker } from '@angular/material/datepicker';
 import { MatSelect } from '@angular/material/select';
-import { ReplaySubject, Subject, takeUntil, take } from 'rxjs';
+import { ReplaySubject, takeUntil } from 'rxjs';
 import { Agrupacion } from 'src/app/models/agrupacion.model';
 import { Autor } from 'src/app/models/autor.model';
 import { AgrupacionesService } from 'src/app/services/agrupaciones.service';
 import { CustomErrorStateMatcher } from '../pieces/pieces.component';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-agrupaciones',
@@ -27,6 +18,7 @@ export class AgrupacionesComponent implements OnInit {
 
   // Services
   private readonly agrupacionesService = inject(AgrupacionesService);
+  private readonly alertifyService = inject(AlertifyService);
 
   @Input() autoresList: Autor[] = [];
 
@@ -77,6 +69,7 @@ export class AgrupacionesComponent implements OnInit {
   submit() {
     this.form.markAllAsTouched();
     if (this.form.invalid) {
+      this.alertifyService.error('Completa los campos');
       return;
     }
     let agrupacion: Agrupacion;
@@ -90,8 +83,14 @@ export class AgrupacionesComponent implements OnInit {
     this.agrupacionesService
       .createAgrupacion(agrupacion)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((res) => {
-        this.form.reset();
+      .subscribe({
+        next: (data) => {
+          this.alertifyService.success('Agrupación enviada');
+          this.form.reset();
+        },
+        error: (err) => {
+          this.alertifyService.error(err.error);
+        },
       });
   }
 
