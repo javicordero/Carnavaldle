@@ -1,25 +1,47 @@
+@import "/src/assets/scss/variables";
+
 :host {
   width: 100%;
 }
 
 ::ng-deep {
   .autocomplete-container {
+    border-radius: 8px;
     .suggestions-container.force-hidden {
       visibility: hidden !important;
     }
 
+    .suggestions-container {
+      border-radius: 10px;
+      margin-top: 1px;
+      overflow-y: auto;
+    }
+
+    .not-found {
+      border-radius: 10px;
+      color: black;
+      margin-top: 1px;
+    }
     .not-found.force-hidden {
       visibility: hidden !important;
     }
 
     .input-container {
+      height: 100%;
+
       input {
+        border-radius: 8px;
         padding: 0 10px !important;
         text-overflow: ellipsis !important;
-        width: 96% !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-color: white !important;
+        font-family: Heming, ui-monospace, monospace !important;
+        color: black;
 
         &:disabled {
-          background-color: white !important;
+          cursor: not-allowed;
+          background-color: $white !important;
         }
       }
       .x {
@@ -54,6 +76,23 @@
     button {
       height: 100%;
       width: 100%;
+      background-color: $grey;
+      border: 1px solid $grey;
+      color: white;
+      border-radius: 10px;
+      transition: all 0.2s ease-in-out;
+      padding: 3px;
+      font-family: Heming, ui-monospace, monospace !important;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $darkGrey;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: $grey;
+      }
     }
   }
 }

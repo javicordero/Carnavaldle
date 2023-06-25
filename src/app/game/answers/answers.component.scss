@@ -1,3 +1,4 @@
+@import "/src/assets/scss/variables";
 :host {
   width: 100%;
 }
@@ -14,13 +15,15 @@ article {
   justify-content: center;
   align-items: center;
   height: 40px;
-  border: 1px solid black;
+  border: 1px solid $white;
   border-radius: 4px;
 
   p {
     margin: 0;
     color: white;
     font-size: 1rem;
+    font-family: Heming, ui-monospace, monospace;
+    font-weight: 400;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -29,9 +32,9 @@ article {
 }
 
 .bg-red {
-  background-color: red;
+  background-color: $red;
 }
 
 .bg-green {
-  background-color: green;
+  background-color: $green;
 }

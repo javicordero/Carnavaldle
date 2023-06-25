@@ -1,3 +1,5 @@
+@import "/src/assets/scss/variables.scss";
+
 :host {
   width: 100%;
 }
@@ -9,7 +11,8 @@ section {
     text-align: center;
     p {
       margin: 0;
-      font-size: 1rem;
+      font-size: 1.5rem;
+      line-height: 2rem;
     }
   }
 }
@@ -19,12 +22,13 @@ section {
     position: absolute;
     bottom: 90px;
     width: 100%;
+    font-family: cursive;
   }
 
   .owl-prev,
   .owl-next {
     position: absolute;
-    padding: 2px 4px !important;
+    padding: 4px 6px !important;
   }
 
   .owl-prev {
@@ -33,5 +37,19 @@ section {
 
   .owl-next {
     right: 0;
+  }
+
+  .owl-theme .owl-nav [class*="owl-"] {
+    background: $grey;
+    color: $white;
+
+    &:hover {
+      background: $darkGrey;
+    }
+  }
+
+  .owl-theme .owl-nav .disabled {
+    cursor: not-allowed;
+    background: $grey !important;
   }
 }

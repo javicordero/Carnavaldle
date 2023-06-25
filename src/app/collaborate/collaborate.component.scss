@@ -1,3 +1,31 @@
+@import "/src/assets/scss/variables";
 :host {
   width: 100%;
+}
+
+::ng-deep {
+  .mat-mdc-tab .mdc-tab__text-label {
+    color: $grey;
+  }
+
+  .mdc-tab__ripple::before,
+  .mat-mdc-tab .mat-ripple-element,
+  .mat-mdc-tab-header-pagination .mat-ripple-element,
+  .mat-mdc-tab-link .mat-ripple-element,
+  .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label,
+  .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active
+    .mdc-tab__text-label {
+    color: $white;
+  }
+
+  .mat-mdc-tab:not(.mat-mdc-tab-disabled)
+    .mdc-tab-indicator__content--underline,
+  .mat-mdc-tab-link:not(.mat-mdc-tab-disabled)
+    .mdc-tab-indicator__content--underline {
+    border-color: $white;
+  }
+
+  button {
+    border-color: $white !important;
+  }
 }

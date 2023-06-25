@@ -1,8 +1,17 @@
+:host {
+  height: 20%;
+}
+
 header {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 
     h1 {
       margin: 0;

@@ -1,15 +1,16 @@
 @import "../assets/scss/variables";
 
 .wrapper {
-  width: 60%;
+  width: 50%;
   margin: auto;
+  height: 100%;
 
   @media (width < $xs-breakpoint) {
-    width: 90%;
+    width: 94%;
   }
 
   @media ($xs-breakpoint <= width <= $sm-breakpoint) {
-    width: 75%;
+    width: 60%;
   }
 }
 
