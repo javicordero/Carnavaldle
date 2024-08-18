@@ -11,6 +11,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderModule } from './header/header.module';
 import { SpinnerModule } from './spinner/spinner.module';
 import { LoadingInterceptor } from './loading.interceptor';
+import { SignInModule } from './sign-in/sign-in.module';
+import { SignUpModule } from './sign-up/sign-up.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +26,12 @@ import { LoadingInterceptor } from './loading.interceptor';
     CollaborateModule,
     HttpClientModule,
     SpinnerModule,
+    SignInModule,
+    SignUpModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

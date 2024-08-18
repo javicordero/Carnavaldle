@@ -1,0 +1,29 @@
+<form action="" (submit)="submit()">
+  <mat-form-field>
+    <input matInput [formControl]="usernameCtrl" placeholder="Usuario" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      type="password"
+      [formControl]="password1Ctrl"
+      placeholder="Contraseña"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      type="password"
+      [formControl]="password2Ctrl"
+      placeholder="Repite contraseña"
+    />
+  </mat-form-field>
+
+  <button mat-flat-button>Registrarse</button>
+
+  <span class="psw"
+    >¿Ya tienes cuenta? <a routerLink="/iniciar-sesion">Inicia sesión</a></span
+  >
+</form>

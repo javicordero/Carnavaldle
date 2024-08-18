@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameContainer } from './game/game.container';
 import { CollaborateComponent } from './collaborate/collaborate.component';
 import { LeaderboardContainer } from './leaderboard/leaderboard.container';
+import { SignInContainer } from './sign-in/sign-in.container';
+import { SignUpContainer } from './sign-up/sign-up.container';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
   {
     path: 'clasificacion',
     component: LeaderboardContainer,
+  },
+  {
+    path: 'iniciar-sesion',
+    component: SignInContainer,
+  },
+  {
+    path: 'registro',
+    component: SignUpContainer,
   },
 ];
 

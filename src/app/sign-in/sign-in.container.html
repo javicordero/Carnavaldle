@@ -1,0 +1,24 @@
+<form action="" (submit)="submit()">
+  <mat-form-field>
+    <input matInput [formControl]="usernameCtrl" placeholder="Usuario" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      type="password"
+      [formControl]="passwordCtrl"
+      placeholder="Contraseña"
+    />
+  </mat-form-field>
+
+  <button mat-flat-button>Iniciar sesión</button>
+  <!-- <label>
+    <input type="checkbox" checked="checked" name="remember" /> Remember me
+  </label> -->
+
+  <span class="psw"
+    >No tienes cuenta, <a routerLink="/registro">Regístrate</a></span
+  >
+  <span class="psw"><a href="#">¿Olvidaste la contraseña?</a></span>
+</form>

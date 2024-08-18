@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
+  constructor(private http: HttpClient) {}
+
+  url: string = 'http://localhost:3000/api/v1/users';
+
   mockedUser: User = {
     _id: '1',
     username: 'User1',
@@ -189,5 +194,13 @@ export class UsersService {
 
   getAllUsers(): Observable<User[]> {
     return of(this.allUsers);
+  }
+
+  signUp(user: User): Observable<User> {
+    return this.http.post<User>(`${this.url}/`, user);
+  }
+
+  signIn(user: User): Observable<User> {
+    return this.http.post<User>(`${this.url}/login/`, user);
   }
 }
