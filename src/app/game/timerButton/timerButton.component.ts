@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnDestroy,
+} from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
 
 @Component({
@@ -12,7 +19,8 @@ export class TimerButtonComponent implements OnInit, OnDestroy {
   timeLeft: number = 10;
   @Input() timeLeft$: Subject<number>;
 
-  @Output() startGameEventEmitter: EventEmitter<void> = new EventEmitter<void>();
+  @Output() startGameEventEmitter: EventEmitter<void> =
+    new EventEmitter<void>();
   @Input() gameStarted: boolean;
 
   // Circle timer configuration
@@ -36,6 +44,9 @@ export class TimerButtonComponent implements OnInit, OnDestroy {
 
   timeLimit: number = 10;
   remainingPathColor = this.colorCodes.info.color;
+
+  // Button text
+  @Input() buttonText: string = 'Empezar';
 
   ngOnInit() {
     this.timeLeft$.subscribe((timeLeft) => {
@@ -68,9 +79,9 @@ export class TimerButtonComponent implements OnInit, OnDestroy {
   }
 
   setCircleDasharray() {
-    const circleDasharray = `${(this.calculateTimeFraction() * this.FULL_DASH_ARRAY).toFixed(
-      0
-    )} 283`;
+    const circleDasharray = `${(
+      this.calculateTimeFraction() * this.FULL_DASH_ARRAY
+    ).toFixed(0)} 283`;
     document
       .getElementById('base-timer-path-remaining')
       .setAttribute('stroke-dasharray', circleDasharray);

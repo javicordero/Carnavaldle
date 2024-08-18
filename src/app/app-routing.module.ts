@@ -5,6 +5,7 @@ import { CollaborateComponent } from './collaborate/collaborate.component';
 import { LeaderboardContainer } from './leaderboard/leaderboard.container';
 import { SignInContainer } from './sign-in/sign-in.container';
 import { SignUpContainer } from './sign-up/sign-up.container';
+import { MatchContainer } from './match/match.container';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'game',
     component: GameContainer,
+  },
+  {
+    path: 'match',
+    component: MatchContainer,
   },
   {
     path: 'colaborar',

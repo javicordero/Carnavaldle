@@ -1,10 +1,22 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { Agrupacion } from '../models/agrupacion.model';
 import { Observable, Subject, take } from 'rxjs';
 import { AgrupacionesService } from '../services/agrupaciones.service';
 import { PiecesService } from '../services/pieces.service';
 import { Piece } from '../models/piece.model';
 import { Answer } from '../models/answer.model';
+import { MatchesService } from '../services/matches.service';
+import { MatchResults } from '../models/match-result.class';
+import * as selectors from '../store/selectors';
+import { Store } from '@ngrx/store';
+import * as actions from '../store/actions';
 
 @Component({
   selector: 'app-game-container',
@@ -15,6 +27,8 @@ export class GameContainer implements OnInit {
   // Services
   private readonly agrupacionesService = inject(AgrupacionesService);
   private readonly piecesService = inject(PiecesService);
+  private readonly MatchesService = inject(MatchesService);
+  private readonly store: Store = inject(Store);
 
   // Game
   piece: Piece;
@@ -43,6 +57,16 @@ export class GameContainer implements OnInit {
   interval: number;
   timeLeft$: Subject<number> = new Subject();
 
+  // Button
+  @Input() buttonText: string = 'Empezar';
+
+  // Match
+  isMatchStarted: boolean = false;
+  currentMatchResults!: MatchResults;
+  @Output() startMatchEvent: EventEmitter<any> = new EventEmitter();
+  @Output() gameOverEvent: EventEmitter<any> = new EventEmitter();
+  @Output() gameWinEvent: EventEmitter<boolean> = new EventEmitter();
+
   constructor() {
     this.agrupacionesList$ = this.agrupacionesService.getAgrupaciones();
   }
@@ -60,6 +84,25 @@ export class GameContainer implements OnInit {
       this.quote = this.piece.quotes[this.quoteIndex];
       this.quotesList.push(this.quote);
     });
+
+    // this.store
+    //   .select(selectors.selectMatchResults)
+    //   .subscribe((matchResults: MatchResults) => {
+    //     this.currentMatchResults = matchResults;
+    //     console.log(matchResults);
+    //   });
+
+    // this.store
+    //   .select(selectors.selectIsMatchStarted)
+    //   .subscribe((isMatchStarted: boolean) => {
+    //     this.isMatchStarted = isMatchStarted;
+    //     console.log(isMatchStarted);
+    //     if (this.isMatchStarted) {
+    //       this.buttonText = 'Siguiente';
+    //     } else {
+    //       this.buttonText = 'Empezar';
+    //     }
+    //   });
 
     this.agrupacionesList$.subscribe((agrupaciones) => {
       this.agrupacionesList = agrupaciones;
@@ -87,6 +130,9 @@ export class GameContainer implements OnInit {
   }
 
   startGame() {
+    if (this.isMatchStarted == false) {
+      this.startMatchEvent.emit();
+    }
     // Reset values
     this.tries = 1;
     this.quoteIndex = 0;
@@ -115,11 +161,15 @@ export class GameContainer implements OnInit {
 
   gameWin() {
     this.stopGame();
+    this.gameWinEvent.emit(this.tries === 1);
+
     // alert('Acierto');
   }
 
   gameOver() {
     this.stopGame();
+    this.store.dispatch(actions.setIsMatchStarted({ isMatchStarted: false }));
+
     // alert('Game Over');
   }
 

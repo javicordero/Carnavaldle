@@ -3,11 +3,19 @@
     <app-timerButton
       [gameStarted]="gameStarted"
       [timeLeft$]="timeLeft$"
+      [buttonText]="buttonText"
       (startGameEventEmitter)="startGame()"
     ></app-timerButton>
-    <app-tries [tries]="tries" [maxTries]="maxTries" *ngIf="gameStarted"></app-tries>
+    <app-tries
+      [tries]="tries"
+      [maxTries]="maxTries"
+      *ngIf="gameStarted"
+    ></app-tries>
   </div>
-  <app-quotes [quoteIndex$]="quoteIndex$" [quotesList]="quotesList"></app-quotes>
+  <app-quotes
+    [quoteIndex$]="quoteIndex$"
+    [quotesList]="quotesList"
+  ></app-quotes>
   <app-guessbox
     [agrupacionList]="agrupacionesList"
     (selectAgrupacionEvent)="selectAgrupacion($event)"

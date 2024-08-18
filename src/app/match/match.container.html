@@ -1,0 +1,12 @@
+<div class="match-section">
+  <app-match-resutls
+    [resutls]="currentMatchResults"
+    [isMatchStarted]="isMatchStarted"
+  ></app-match-resutls>
+  <app-game-container
+    [buttonText]="buttonText"
+    (startMatchEvent)="startNewMatch()"
+    (gameOverEvent)="gameOver()"
+    (gameWinEvent)="gameWin($event)"
+  ></app-game-container>
+</div>

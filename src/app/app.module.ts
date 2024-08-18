@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,13 +13,17 @@ import { SpinnerModule } from './spinner/spinner.module';
 import { LoadingInterceptor } from './loading.interceptor';
 import { SignInModule } from './sign-in/sign-in.module';
 import { SignUpModule } from './sign-up/sign-up.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from './store/reducer';
+import { MatchModule } from './match/match.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GameModule,
+    // GameModule,
     LeaderboardModule,
     HeaderModule,
     BrowserAnimationsModule,
@@ -28,6 +32,9 @@ import { SignUpModule } from './sign-up/sign-up.module';
     SpinnerModule,
     SignInModule,
     SignUpModule,
+    MatchModule,
+    StoreModule.forRoot({ App: appReducer }, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
