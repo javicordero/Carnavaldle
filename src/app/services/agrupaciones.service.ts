@@ -9,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class AgrupacionesService {
   constructor(private http: HttpClient) {}
 
-  url: string = 'http://localhost:3000/api/v1/agrupaciones';
+  // url: string = 'https://carnavaldle-back.onrender.com/api/v1/agrupaciones';
+  url: string = 'https://carnavaldle-back.onrender.com/api/v1/agrupaciones';
 
   getAgrupaciones(): Observable<Agrupacion[]> {
     return this.http.get<Agrupacion[]>(`${this.url}/`);

@@ -10,16 +10,16 @@ import { MatchContainer } from './match/match.container';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'game',
+    redirectTo: 'match',
     pathMatch: 'full',
-  },
-  {
-    path: 'game',
-    component: GameContainer,
   },
   {
     path: 'match',
     component: MatchContainer,
+  },
+  {
+    path: 'game',
+    component: GameContainer,
   },
   {
     path: 'colaborar',

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AutoresService {
   constructor(private http: HttpClient) {}
 
-  url: string = 'http://localhost:3000/api/v1/autores';
+  url: string = 'https://carnavaldle-back.onrender.com/api/v1/autores';
 
   getAutores(): Observable<Autor[]> {
     return this.http.get<Autor[]>(`${this.url}/`);

@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class UsersService {
   constructor(private http: HttpClient) {}
 
-  url: string = 'http://localhost:3000/api/v1/users';
+  url: string = 'https://carnavaldle-back.onrender.com/api/v1/users';
 
   mockedUser: User = {
     _id: '1',

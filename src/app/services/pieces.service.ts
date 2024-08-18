@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PiecesService {
-  private url: string = 'http://localhost:3000/api/v1/pieces';
+  private url: string = 'https://carnavaldle-back.onrender.com/api/v1/pieces';
 
   private _refresh$: Subject<void> = new Subject();
   get refresh$(): Observable<void> {
@@ -25,13 +25,17 @@ export class PiecesService {
   }
 
   public createPiece(piece: Piece): Observable<Piece> {
-    return this.http.post<Piece>(`${this.url}/`, piece).pipe(tap(() => this._refresh$.next()));
+    return this.http
+      .post<Piece>(`${this.url}/`, piece)
+      .pipe(tap(() => this._refresh$.next()));
   }
 
   public getRandomPiece(): Observable<Piece> {
     return this.http.get<Piece>(`${this.url}/random`).pipe(
       map((piece: Piece) => {
-        piece.quotes = this.sortRandomAndQuitSpaces(this.splitLyricsInQuotes(piece.lyrics));
+        piece.quotes = this.sortRandomAndQuitSpaces(
+          this.splitLyricsInQuotes(piece.lyrics)
+        );
         return piece;
       })
     );
